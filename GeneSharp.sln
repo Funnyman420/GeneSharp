@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneSharp", "GeneSharp\GeneSharp.csproj", "{5B0E594D-EB1E-475C-AC1A-7348667AA8E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestRandomNumber", "samples\BestRandomNumber.csproj", "{5B0E594D-EB1E-475C-AC1A-7348667AA8E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A724E823-082C-4E5D-82B9-08694F5773DE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneSharp", "src\GeneSharp.csproj", "{6B8B2AD2-D1C7-4573-9C6F-E49A374C8F75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{32094F94-788A-4EAB-BA84-B7F23E022624}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +21,17 @@ Global
 		{5B0E594D-EB1E-475C-AC1A-7348667AA8E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B0E594D-EB1E-475C-AC1A-7348667AA8E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B0E594D-EB1E-475C-AC1A-7348667AA8E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B8B2AD2-D1C7-4573-9C6F-E49A374C8F75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B8B2AD2-D1C7-4573-9C6F-E49A374C8F75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B8B2AD2-D1C7-4573-9C6F-E49A374C8F75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B8B2AD2-D1C7-4573-9C6F-E49A374C8F75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B0E594D-EB1E-475C-AC1A-7348667AA8E0} = {32094F94-788A-4EAB-BA84-B7F23E022624}
+		{6B8B2AD2-D1C7-4573-9C6F-E49A374C8F75} = {A724E823-082C-4E5D-82B9-08694F5773DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0CE7FD1-73E0-4EDB-A892-E4D26ECF43BF}
