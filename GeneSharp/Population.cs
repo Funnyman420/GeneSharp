@@ -18,7 +18,8 @@ namespace GeneSharp
         private readonly Random _random = new Random();
 
 
-        public Population(int populationSize,
+        public Population(
+            int populationSize,
             int lengthOfChromosome,
             Func<Chromosome, double> fitnessFuntion,
             double mutationRate = 0.03)
@@ -52,7 +53,7 @@ namespace GeneSharp
             var threshold = _random.NextDouble(0, populationSelection);
             Chromosome selectedParent = null;
 
-            foreach(var chromosome in PopulationList)
+            foreach (var chromosome in PopulationList)
             {
                 if (sumTillThreshold <= threshold)
                     sumTillThreshold += chromosome.FitnessScore;
@@ -73,7 +74,7 @@ namespace GeneSharp
             Chromosome child;
             var recycledChromosomes = Convert.ToInt32(PopulationList.Count * BornRate);
 
-            for (var i = 0; i< recycledChromosomes; i++)
+            for (var i = 0; i < recycledChromosomes; i++)
             {
                 firstParent = ParentSelection();
                 secondParent = ParentSelection();
@@ -82,30 +83,25 @@ namespace GeneSharp
             }
 
             for (var i = 0; i < recycledChromosomes; i++)
-            {
                 KillChromosome();
-            }
-
         }
 
         private int BinarySearch(Chromosome subject)
         {
             int mid;
-            int low = 0;
-            int high = PopulationList.Count -1;
+            var low = 0;
+            var high = PopulationList.Count;
 
             while (low < high)
             {
                 mid = (low + high) / 2;
-
-                if (PopulationList[mid].FitnessScore < subject.FitnessScore)
+                if (PopulationList[mid].FitnessScore > subject.FitnessScore)
                     low = mid + 1;
-                else if (PopulationList[mid].FitnessScore > subject.FitnessScore)
-                    high = mid - 1;
                 else
-                    return mid;
+                    high = mid;
             }
-            throw new ArgumentException("Subject Chromosome is not in the Array");
+
+            return low;
         }
 
         private void AddToPopulation(Chromosome subject)
@@ -115,10 +111,9 @@ namespace GeneSharp
             PopulationList.Insert(BinarySearch(subject), subject);
         }
 
-        private void ApplyFitness(Chromosome subject)
-        {
+        private void ApplyFitness(Chromosome subject) =>
             subject.FitnessScore = FitnessFunction(subject);
-        }
+
 
         private void ComputeProbabilities()
         {

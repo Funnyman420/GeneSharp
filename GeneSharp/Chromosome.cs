@@ -83,7 +83,7 @@ namespace GeneSharp
         public Chromosome ShallowClone() => MemberwiseClone() as Chromosome;
 
         public override string ToString() =>
-            $"Chromosome: [{string.Join(", ", ChromosomeList)}] Probability: {Probability} Fitness Score {FitnessScore}";
+            $"Chromosome: [{string.Join(", ", ChromosomeList)}] \nProbability: {Probability} \nFitnessScore: {FitnessScore}\n";
 
     }
 }

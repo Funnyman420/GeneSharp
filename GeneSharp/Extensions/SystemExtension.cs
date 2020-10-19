@@ -21,29 +21,33 @@ namespace GeneSharp.Extensions
             return source.NextDouble() * (max - min) + min;
         }
 
-        public static IEnumerable<T> Swap<T> (this IEnumerable<T> source, 
-            int firstIndex, 
+        public static IEnumerable<T> Swap<T>(
+            this IEnumerable<T> source,
+            int firstIndex,
             int secondIndex)
         {
+            var smallIndex = firstIndex < secondIndex ? firstIndex : secondIndex;
+            var largeIndex = smallIndex == firstIndex ? secondIndex : firstIndex;
+
             using (IEnumerator<T> e = source.GetEnumerator())
             {
-                for (var i = 0; i < firstIndex; i++)
+                for (var i = 0; i < smallIndex; i++)
                 {
                     if (!e.MoveNext())
                         yield break;
                     yield return e.Current;
                 }
 
-                if (firstIndex != secondIndex)
+                if (smallIndex != largeIndex)
                 {
                     if (!e.MoveNext())
                         yield break;
 
                     var rememberedItem = e.Current;
 
-                    var subset = new List<T>(secondIndex - firstIndex - 1);
+                    var subset = new List<T>(largeIndex - smallIndex - 1);
 
-                    for (int i = firstIndex + 1; i < secondIndex; i++)
+                    for (int i = smallIndex + 1; i < largeIndex; i++)
                     {
                         if (!e.MoveNext())
                             break;

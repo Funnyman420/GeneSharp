@@ -7,7 +7,7 @@ namespace GeneSharp
     {
         static void Main(string[] args)
         {
-            var population = new Population(5, 5,
+            var population = new Population(30, 30,
                 chromosome =>
                 {
                     var random = new Random();
@@ -18,12 +18,12 @@ namespace GeneSharp
             Console.WriteLine("--Initial Generation--");
             Console.WriteLine(population.ToString());
 
-            for (var i = 0; i < 1000; i++)
+            for (var i = 0; i < 100000; i++)
             {
                 population.PopulationStep();
-                Console.WriteLine($"--Generation {i}--");
-                Console.WriteLine(population.ToString());
             }
+            Console.WriteLine($"--Final Generation--");
+            Console.WriteLine(population.ToString());
             Console.ReadKey();
         }
     }
