@@ -18,6 +18,12 @@ namespace GeneSharp
 
         private readonly Random _random = new Random();
 
+        /// <summary>
+        /// The constructor of the Chromosome object. It creates a
+        /// list of <paramref name="lengthSize"/> length and orders it
+        /// randomly.
+        /// </summary>
+        /// <param name="lengthSize">The chromosome's length</param>
         public Chromosome(int lengthSize)
         {
             ChromosomeList = Enumerable.Range(0, lengthSize)
@@ -29,7 +35,15 @@ namespace GeneSharp
             Probability = 1;
         }
 
-        public Chromosome TwoPointCrossover(Chromosome secondParent)
+        /// <summary>
+        /// In Genetic Algorithms crossover is a genetic operator used to combine the genetic information
+        /// of two parents to generate an new offspring (source: https://en.wikipedia.org/wiki/Crossover_(genetic_algorithm))
+        /// 
+        /// This is exactly what the function does.
+        /// </summary>
+        /// <param name="secondParent">The parent that this chromosome is going to "mate" with</param>
+        /// <returns></returns>
+        public Chromosome TwoPointCrossoverWith(Chromosome secondParent)
         {
             int firstPointCrossover;
             int secondPointCrossover;
@@ -57,6 +71,12 @@ namespace GeneSharp
             return child;
         }
 
+        /// <summary>
+        /// In Evolutionary Theory, there is a chance that the offspring
+        /// of two parents is going to mutate randomly. This simulates that 
+        /// behavior by having the <paramref name="subject"/> swap two elements inside its list.
+        /// </summary>
+        /// <param name="subject">The chromosome to *potentially* be mutated</param>
         public void MutationChange(Chromosome subject)
         {
             int firstPoint;
@@ -80,6 +100,10 @@ namespace GeneSharp
         public int FindGene(Chromosome firstParent, int geneValue) =>
              firstParent.ChromosomeList.FindIndex(e => e == geneValue);
 
+        /// <summary>
+        /// Shallow Clone behavior
+        /// </summary>
+        /// <returns>An exact copy of the chromosome, packed with a new pointer</returns>
         public Chromosome ShallowClone() => MemberwiseClone() as Chromosome;
 
         public override string ToString() =>

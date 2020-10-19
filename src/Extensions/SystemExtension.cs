@@ -8,19 +8,29 @@ namespace GeneSharp.Extensions
 {
     public static class SystemExtension
     {
+
         /// <summary>
-        /// Implementation for Deep Cloning Objects. First we convert
-        /// them to a Json Serialized Object and then we desirialize it
-        /// to the given Type
+        /// Extension to overload the NextDouble method of Random.
+        /// We want an easy and clean way to pick a random double between two doubles
         /// </summary>
-        /// <typeparam name="T">The type of the Object that we want to clone</typeparam>
-        /// <param name="source">The Object that we want to clone</param>
-        /// <returns>The values of the object that we want to clone packed in a new object</returns>
+        /// <param name="source">The Random object</param>
+        /// <param name="min">The smallest value of value range</param>
+        /// <param name="max">The highest value of value range</param>
+        /// <returns>A double between <paramref name="min"/> and <paramref name="max"/></returns>
         public static double NextDouble(this Random source, double min, double max)
         {
             return source.NextDouble() * (max - min) + min;
         }
 
+        /// <summary>
+        /// Extension function that swaps two elements of an Enumerable at 
+        /// the indexes of <paramref name="firstIndex"/> and <paramref name="secondIndex"/>
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source">The IEnumerable object itself</param>
+        /// <param name="firstIndex">The desired index to be swapped with <paramref name="secondIndex"/></param>
+        /// <param name="secondIndex">The desired idnex to be swapped with <paramref name="firstIndex"/></param>
+        /// <returns></returns>
         public static IEnumerable<T> Swap<T>(
             this IEnumerable<T> source,
             int firstIndex,

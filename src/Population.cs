@@ -45,7 +45,13 @@ namespace GeneSharp
                 .ToList();
 
         }
-
+        /// <summary>
+        /// Roulette-type selection for the parents. Generally,
+        /// the one with the highest FitnessScore has the highest chance
+        /// to be one of the parents, but that's not sure. Especially in the early
+        /// stages of the algorithm.
+        /// </summary>
+        /// <returns>The selected chromosome to become a parent</returns>
         private Chromosome ParentSelection()
         {
             var populationSelection = ParentRate * FitnessSum;
@@ -67,6 +73,7 @@ namespace GeneSharp
             return selectedParent ?? throw new Exception("Parent not found");
         }
 
+
         public void PopulationStep()
         {
             Chromosome firstParent;
@@ -78,7 +85,7 @@ namespace GeneSharp
             {
                 firstParent = ParentSelection();
                 secondParent = ParentSelection();
-                child = firstParent.TwoPointCrossover(secondParent);
+                child = firstParent.TwoPointCrossoverWith(secondParent);
                 AddToPopulation(child);
             }
 
@@ -86,6 +93,12 @@ namespace GeneSharp
                 KillChromosome();
         }
 
+        /// <summary>
+        /// Binary search in order to find the leftmost part of the PopulationList
+        /// based on FitnessScore of Chromosomes, in order to implement InsertionSort.
+        /// </summary>
+        /// <param name="subject">Chromosome to be added to PopulationList</param>
+        /// <returns>The index of <paramref name="subject"/></returns>
         private int BinarySearch(Chromosome subject)
         {
             int mid;
@@ -104,6 +117,10 @@ namespace GeneSharp
             return low;
         }
 
+        /// <summary>
+        /// Adds <paramref name="subject"/> chromosome to PopulationList using InsertionSort.
+        /// </summary>
+        /// <param name="subject">The chromosome to be added</param>
         private void AddToPopulation(Chromosome subject)
         {
             ApplyFitness(subject);
@@ -111,6 +128,10 @@ namespace GeneSharp
             PopulationList.Insert(BinarySearch(subject), subject);
         }
 
+        /// <summary>
+        /// Applies FitnessFunction of Population, to find the FitnessScore of Chromosome.
+        /// </summary>
+        /// <param name="subject"></param>
         private void ApplyFitness(Chromosome subject) =>
             subject.FitnessScore = FitnessFunction(subject);
 
@@ -123,7 +144,10 @@ namespace GeneSharp
             }
         }
 
-
+        /// <summary>
+        /// The weakest chromosomes die. The strongest survive.
+        /// Darwin's favorite part of the code, if he was alive to see this.
+        /// </summary>
         private void KillChromosome()
         {
             var killedChromosome = PopulationList.Last();
